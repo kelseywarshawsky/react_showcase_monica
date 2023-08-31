@@ -1,16 +1,20 @@
 import { useState } from 'react'
 import './App.css'
-import { Box, Typography, Checkbox, TextField, Button } from '@mui/material'
+import { Box, Typography, Checkbox, TextField, Button, ListItemButton, ListItemText } from '@mui/material'
 
 
 
 function App() {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-  const [checked, setChecked] = useState("1")
+  const checkBox = (index) => {
+    const newTodos=[...todos]
+    newTodos[index].checked = !newTodos[index].checked
+    setTodos(newTodos)
+  }
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("")
-
-
+ 
+ 
   return (
    <Box>
     <Typography variant="h1">
@@ -18,13 +22,24 @@ function App() {
     </Typography>
     <div>
       <Box>
-        <Box>{todos}</Box>
-    <TextField onChange={(e) => setNewTodo(e.target.value)} id="outlined-basic" label="To Do" variant="outlined" />
+    <TextField onChange={(e) => setNewTodo(e.target.value)} value={newTodo} id="outlined-basic" label="To Do" variant="outlined" />
     </Box>
-    <Button onClick={() => setTodos([...todos, newTodo])} sx={{marginLeft: '1em'}} variant="contained" >Add To Do</Button>
-      <Checkbox value="1" onChange={(e)=> setChecked(e.target.value)} color="warning" id= "1" checked={checked === "1"} {...label} />
-      <Checkbox value="2" onChange={(e)=> setChecked(e.target.value)} id= "2" checked={checked === "2"}{...label} />
-      <Checkbox value="3" onChange={(e)=> setChecked(e.target.value)} id= "3" checked={checked === "3"}{...label} />
+<Box>
+{todos.map((todo, index) => (
+    <ListItemButton key={index} component="a" href="#simple-list">
+  <ListItemText primary={todo.name} />
+  <Checkbox onChange={()=> checkBox(index)} color="warning" id= "1" checked={todo.checked} {...label} />
+</ListItemButton>
+
+))}
+
+</Box>
+
+    <Button onClick={() => setTodos([...todos, {name:newTodo, checked: false}])} sx={{marginLeft: '1em'}} variant="contained" >Add To Do</Button>
+    
+   
+
+
     </div>
 
    </Box>
