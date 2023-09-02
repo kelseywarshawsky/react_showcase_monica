@@ -12,13 +12,20 @@ import {
 
 function App() {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
+  const [todos, setTodos] = useState([]);
+  const [newTodo, setNewTodo] = useState("");
+
   const checkBox = (index) => {
     const newTodos = [...todos];
     newTodos[index].checked = !newTodos[index].checked;
     setTodos(newTodos);
   };
-  const [todos, setTodos] = useState([]);
-  const [newTodo, setNewTodo] = useState("");
+
+  const handleRemove = (index) => {
+    const newTodos = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+  };
 
   return (
     <Box>
@@ -44,6 +51,13 @@ function App() {
                 checked={todo.checked}
                 {...label}
               />
+              <Button
+                type="button"
+                onClick={() => handleRemove(index)}
+                variant="outlined"
+              >
+                Delete
+              </Button>
             </ListItemButton>
           ))}
         </Box>
