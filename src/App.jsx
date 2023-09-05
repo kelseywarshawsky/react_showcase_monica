@@ -1,119 +1,39 @@
 import { useState } from "react";
-import "./App.css";
-import {
-  Box,
-  Typography,
-  Checkbox,
-  TextField,
-  Button,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material";
 
-function App() {
-  const label = { inputProps: { "aria-label": "Checkbox demo" } };
-  const [todos, setTodos] = useState([]);
-  const [newTodo, setNewTodo] = useState("");
-  const [editingIndex, setEditingIndex] = useState(-1);
-  const [editedText, setEditedText] = useState("");
-
-  const checkBox = (index) => {
-    const newTodos = [...todos];
-    newTodos[index].checked = !newTodos[index].checked;
-    setTodos(newTodos);
-  };
-
-  const handleRemove = (index) => {
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
-  };
-
-  const handleEdit = (index) => {
-    setEditingIndex(index);
-    setEditedText(todos[index].name);
-  };
-
-  const handleSaveEdit = (index) => {
-    const newTodos = [...todos];
-    newTodos[index].name = editedText;
-    setTodos(newTodos);
-    setEditingIndex(-1);
-  };
-
+function Square({ value, onSquareClick }) {
   return (
-    <Box>
-      <Typography variant="h1">our to do app</Typography>
-      <div>
-        <Box>
-          <TextField
-            onChange={(e) => setNewTodo(e.target.value)}
-            value={newTodo}
-            id="outlined-basic"
-            label="To Do"
-            variant="outlined"
-          />
-        </Box>
-        <Box>
-          {todos.map((todo, index) => (
-            <ListItemButton key={index} component="a" href="#simple-list">
-              {editingIndex === index ? (
-                <>
-                  <TextField
-                    Value={editedText}
-                    onChange={(e) => setEditedText(e.target.value)}
-                  />
-                  <Button
-                    type="button"
-                    variant="outlined"
-                    onClick={() => handleSaveEdit(index)}
-                  >
-                    Save
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <ListItemText primary={todo.name} />
-                  <Checkbox
-                    onChange={() => checkBox(index)}
-                    color="warning"
-                    id="1"
-                    checked={todo.checked}
-                    {...label}
-                  />
-                  <Button
-                    type="button"
-                    onClick={() => handleEdit(index)}
-                    variant="outlined"
-                  >
-                    Edit
-                  </Button>
-
-                  <Button
-                    type="button"
-                    onClick={() => handleRemove(index)}
-                    variant="outlined"
-                  >
-                    Delete
-                  </Button>
-                </>
-              )}
-            </ListItemButton>
-          ))}
-        </Box>
-
-        <Button
-          onClick={() =>
-            setTodos([...todos, { name: newTodo, checked: false }])
-          }
-          sx={{ marginLeft: "1em" }}
-          variant="contained"
-        >
-          Add To Do
-        </Button>
-      </div>
-    </Box>
+    <button className="square" onClick={onSquareClick}>
+      {value}
+    </button>
   );
 }
 
-export default App;
+export default function Board() {
+  const [squares, setSquares] = useState(Array(9).fill(null));
+
+  function handleClick(i) {
+    const nextSquares = squares.slice();
+    nextSquares[i] = "X";
+    setSquares(nextSquares);
+  }
+  return (
+    <>
+      <div className="board-row">
+        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
+        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
+        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+      </div>
+      <div className="board-row">
+        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
+        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
+        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
+      </div>
+
+      <div className="board-row">
+        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
+        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
+        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+      </div>
+    </>
+  );
+}
