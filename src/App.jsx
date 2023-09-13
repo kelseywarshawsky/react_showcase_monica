@@ -15,6 +15,7 @@ import {
 import { StaticRouter } from "react-router-dom/server";
 import TicTacToe from "./TicTacToe";
 import Todo from "./Todo";
+import FilterableProductTable from "./Shoppinglist";
 
 function Router(props) {
   const { children } = props;
@@ -48,7 +49,7 @@ function useRouteMatch(patterns) {
 }
 
 function CenteredTabs() {
-  const routeMatch = useRouteMatch(["/tictactoe", "/todo"]);
+  const routeMatch = useRouteMatch(["/tictactoe", "/todo", "/filterableproducttable"]);
   const currentTab = routeMatch?.pattern?.path;
 
   return (
@@ -59,7 +60,19 @@ function CenteredTabs() {
         to="/tictactoe"
         component={Link}
       />
-      <Tab label="To Do" value="/todo" to="/todo" component={Link} />
+      <Tab 
+      label="To Do" 
+      value="/todo" 
+      to="/todo" 
+      component={Link} 
+      />
+      <Tab 
+        label="Filterable Product Table" 
+        value="/filterableproducttable" 
+        to="/filterableproducttable" 
+        component={Link} 
+        />
+
     </Tabs>
   );
 }
@@ -70,6 +83,8 @@ export default function TabsRouter() {
       <Routes>
         <Route path="/tictactoe" element={<TicTacToe />} />
         <Route path="/todo" element={<Todo />} />
+        <Route path="/filterableproducttable" element={<FilterableProductTable />} />
+        {/* <Route path="/Shopping List" element={<App />} /> */}
       </Routes>
       <CenteredTabs />
     </BrowserRouter>
