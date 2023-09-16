@@ -9,7 +9,7 @@ import {
   ListItemText,
 } from "@mui/material";
 
-function Todo() {
+export default function Todo() {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
@@ -114,5 +114,3 @@ function Todo() {
     </Box>
   );
 }
-
-export default Todo;
