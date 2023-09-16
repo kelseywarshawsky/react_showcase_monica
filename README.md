@@ -1,4 +1,4 @@
-<h1 align="center">React Work Showcase</h1>
+<h1 align="center">React Work Showcase - Monica Dominguez</h1>
 <div align="left">
 <!-- ABOUT THE PROJECT -->
 This project is the beginning of Monica Dominguez's work produced out of our mentorship agreement. We meet multiple times each week to discuss React and work on React-based projects. All work is solely Monica's, with the goals assigned by me and code reviewed by me (Kelsey Warshawsky). This is a mixture of several tutorials and projects to put what was learned in those tutorials directly into action. 
