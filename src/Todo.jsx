@@ -1,18 +1,7 @@
 import { useState } from "react";
-import {
-  Box,
-  Typography,
-  Checkbox,
-  TextField,
-  Button,
-  // ListItemButton,
-  // ListItemText,
-  handleSaveEdit,
-  handleEdit,
-} from "@mui/material";
+import { Box, Typography, TextField, Button } from "@mui/material";
 import TodoItem from "./components/TodoItem";
-// import TodoCheckbox from "./TodoCheckbox";
-import SearchBarItem from "./components/Searchbar";
+
 
 export default function Todo() {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -48,6 +37,7 @@ export default function Todo() {
   return (
     <Box>
       <Typography variant="h1">our to do app</Typography>
+      
       <div>
         <Box>
           <TextField
@@ -63,10 +53,15 @@ export default function Todo() {
             <TodoItem
               key={todo.id}
               index={index}
-              editingIndex={editedText}
+              editingIndex={editingIndex}
               todo={todo}
               editedText={editedText}
               setEditedText={setEditedText}
+              handleRemove={handleRemove}
+              label={label}
+              checkBoxChange={checkBoxChange}
+              handleEdit={handleEdit}
+              handleSaveEdit={handleSaveEdit}
             />
           ))}
         </Box>

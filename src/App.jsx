@@ -1,8 +1,8 @@
-import * as React from "react";
+// import * as React from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
+// import Typography from "@mui/material/Typography";
 import {
   MemoryRouter,
   Route,
@@ -16,7 +16,7 @@ import { StaticRouter } from "react-router-dom/server";
 import TicTacToe from "./TicTacToe";
 import Todo from "./Todo";
 import FilterableProductTable from "./Shoppinglist";
-import { Box } from "@mui/material";
+import Weather from "./components/Weather";
 
 function Router(props) {
   const { children } = props;
@@ -49,39 +49,34 @@ function useRouteMatch(patterns) {
   return null;
 }
 
-
-
 function CenteredTabs() {
-  const routeMatch = useRouteMatch(["/tictactoe", "/todo", "/filterableproducttable"]);
+  const routeMatch = useRouteMatch([
+    "/tictactoe",
+    "/todo",
+    "/filterableproducttable",
+    "/weather",
+  ]);
   const currentTab = routeMatch?.pattern?.path;
 
   return (
-   <Tabs value={currentTab}>
+    <Tabs value={currentTab}>
       <Tab
         label="Tic Tac Toe"
         value="/tictactoe"
         to="/tictactoe"
         component={Link}
       />
-      <Tab 
-      label="To Do" 
-      value="/todo" 
-      to="/todo" 
-      component={Link} 
+      <Tab label="To Do" value="/todo" to="/todo" component={Link} />
+      <Tab
+        label="Filterable Product Table"
+        value="/filterableproducttable"
+        to="/filterableproducttable"
+        component={Link}
       />
-      <Tab 
-        label="Filterable Product Table" 
-        value="/filterableproducttable" 
-        to="/filterableproducttable" 
-        component={Link} 
-        />
-
+      <Tab label="Da Weather" value="/weather" to="/weather" component={Link} />
     </Tabs>
-    
   );
 }
-
-
 
 export default function TabsRouter() {
   return (
@@ -89,8 +84,11 @@ export default function TabsRouter() {
       <Routes>
         <Route path="/tictactoe" element={<TicTacToe />} />
         <Route path="/todo" element={<Todo />} />
-        <Route path="/filterableproducttable" element={<FilterableProductTable />} />
-        {/* <Route path="/Shopping List" element={<App />} /> */}
+        <Route
+          path="/filterableproducttable"
+          element={<FilterableProductTable />}
+        />
+        <Route path="/weather" element={<Weather />} />
       </Routes>
       <CenteredTabs />
     </BrowserRouter>
