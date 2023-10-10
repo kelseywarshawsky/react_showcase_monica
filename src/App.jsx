@@ -1,4 +1,4 @@
-// import * as React from "react";
+import * as React from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -17,6 +17,9 @@ import TicTacToe from "./TicTacToe";
 import Todo from "./Todo";
 import FilterableProductTable from "./Shoppinglist";
 import Weather from "./components/Weather";
+// import PlainSearchBar from './components/PlainSearchBar';
+import ArtSearch from "./components/ArtSearch";
+import FixedContainer from "./components/Login";
 
 function Router(props) {
   const { children } = props;
@@ -55,6 +58,8 @@ function CenteredTabs() {
     "/todo",
     "/filterableproducttable",
     "/weather",
+    "/art",
+    "/login"
   ]);
   const currentTab = routeMatch?.pattern?.path;
 
@@ -66,15 +71,33 @@ function CenteredTabs() {
         to="/tictactoe"
         component={Link}
       />
-      <Tab label="To Do" value="/todo" to="/todo" component={Link} />
+      <Tab 
+      label="To Do" 
+      value="/todo" 
+      to="/todo" 
+      component={Link} />
       <Tab
         label="Filterable Product Table"
         value="/filterableproducttable"
         to="/filterableproducttable"
         component={Link}
       />
-      <Tab label="Da Weather" value="/weather" to="/weather" component={Link} />
-    </Tabs>
+      <Tab 
+      label="Weather" 
+      value="/weather" 
+      to="/weather" 
+      component={Link} />
+       <Tab 
+      label="Art" 
+      value="/art" 
+      to="/art" 
+      component={Link} />
+           <Tab 
+           label="Login" 
+           value="/login" 
+           to="/login" 
+           component={Link} />
+         </Tabs>
   );
 }
 
@@ -89,6 +112,9 @@ export default function TabsRouter() {
           element={<FilterableProductTable />}
         />
         <Route path="/weather" element={<Weather />} />
+        <Route path="/art" element={<ArtSearch />} />
+        <Route path="/login" element={<FixedContainer />} />
+
       </Routes>
       <CenteredTabs />
     </BrowserRouter>
