@@ -70,11 +70,13 @@ export default function ArtistSearch() {
       </Box>
 
       <Grid container spacing={3} sx={{ margin: 4 }}>
-        {searchResults.map((result) => (
+        {searchResults?.map((result, index) => (
           <ArtistCard
-            key={result.title}
+            key={`${result.title}-${index}`}
             title={result?.title}
-            url={result?.images[0]?.baseimageurl}
+            url={
+              result?.images?.length > 0 ? result.images[0].baseimageurl : ""
+            }
           />
         ))}
       </Grid>

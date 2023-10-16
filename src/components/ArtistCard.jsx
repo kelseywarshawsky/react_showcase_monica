@@ -10,7 +10,7 @@ import {
 export default function ArtistCard({ title, url }) {
   return (
     <Card sx={{ maxWidth: 345, margin: 2 }}>
-      {url !== undefined ? (
+      {url !== "" && url !== undefined ? (
         <CardMedia sx={{ height: 140 }} image={url} title={title} />
       ) : (
         <></>

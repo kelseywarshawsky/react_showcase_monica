@@ -20,6 +20,18 @@ import Weather from "./components/Weather";
 // import PlainSearchBar from './components/PlainSearchBar';
 import ArtSearch from "./components/ArtSearch";
 import FixedContainer from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import { ThemeProvider } from "@mui/material";
+import theme from "./theme";
+import { createTheme } from "@mui/material";
+import {
+  green,
+  purple,
+  blue,
+  pink,
+  yellow,
+  orange,
+} from "@mui/material/colors";
 
 function Router(props) {
   const { children } = props;
@@ -59,7 +71,8 @@ function CenteredTabs() {
     "/filterableproducttable",
     "/weather",
     "/art",
-    "/login"
+    "/login",
+    "/dashboard",
   ]);
   const currentTab = routeMatch?.pattern?.path;
 
@@ -71,52 +84,55 @@ function CenteredTabs() {
         to="/tictactoe"
         component={Link}
       />
-      <Tab 
-      label="To Do" 
-      value="/todo" 
-      to="/todo" 
-      component={Link} />
+      <Tab label="To Do" value="/todo" to="/todo" component={Link} />
       <Tab
         label="Filterable Product Table"
         value="/filterableproducttable"
         to="/filterableproducttable"
         component={Link}
       />
-      <Tab 
-      label="Weather" 
-      value="/weather" 
-      to="/weather" 
-      component={Link} />
-       <Tab 
-      label="Art" 
-      value="/art" 
-      to="/art" 
-      component={Link} />
-           <Tab 
-           label="Login" 
-           value="/login" 
-           to="/login" 
-           component={Link} />
-         </Tabs>
+      <Tab label="Weather" value="/weather" to="/weather" component={Link} />
+      <Tab label="Art" value="/art" to="/art" component={Link} />
+      <Tab label="Login" value="/login" to="/login" component={Link} />
+
+      <Tab
+        label="Dashboard"
+        value="/dashboard"
+        to="/dashboard"
+        component={Link}
+      />
+    </Tabs>
   );
 }
 
 export default function TabsRouter() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/tictactoe" element={<TicTacToe />} />
-        <Route path="/todo" element={<Todo />} />
-        <Route
-          path="/filterableproducttable"
-          element={<FilterableProductTable />}
-        />
-        <Route path="/weather" element={<Weather />} />
-        <Route path="/art" element={<ArtSearch />} />
-        <Route path="/login" element={<FixedContainer />} />
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: pink[500],
+      },
+    },
+  });
 
-      </Routes>
-      <CenteredTabs />
-    </BrowserRouter>
+  return (
+    <div className="App">
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/tictactoe" element={<TicTacToe />} />
+            <Route path="/todo" element={<Todo />} />
+            <Route
+              path="/filterableproducttable"
+              element={<FilterableProductTable />}
+            />
+            <Route path="/weather" element={<Weather />} />
+            <Route path="/art" element={<ArtSearch />} />
+            <Route path="/login" element={<FixedContainer />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
+          <CenteredTabs />
+        </BrowserRouter>
+      </ThemeProvider>
+    </div>
   );
 }
