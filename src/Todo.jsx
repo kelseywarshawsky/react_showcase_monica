@@ -1,13 +1,7 @@
 import { useState } from "react";
-import {
-  Box,
-  Typography,
-  Checkbox,
-  TextField,
-  Button,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material";
+import { Box, Typography, TextField, Button } from "@mui/material";
+import TodoItem from "./components/TodoItem";
+
 
 export default function Todo() {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -16,7 +10,7 @@ export default function Todo() {
   const [editingIndex, setEditingIndex] = useState(-1);
   const [editedText, setEditedText] = useState("");
 
-  const checkBox = (index) => {
+  const checkBoxChange = (index) => {
     const newTodos = [...todos];
     newTodos[index].checked = !newTodos[index].checked;
     setTodos(newTodos);
@@ -43,6 +37,7 @@ export default function Todo() {
   return (
     <Box>
       <Typography variant="h1">our to do app</Typography>
+      
       <div>
         <Box>
           <TextField
@@ -55,49 +50,19 @@ export default function Todo() {
         </Box>
         <Box>
           {todos.map((todo, index) => (
-            <ListItemButton key={index} component="a" href="#simple-list">
-              {editingIndex === index ? (
-                <>
-                  <TextField
-                    Value={editedText}
-                    onChange={(e) => setEditedText(e.target.value)}
-                  />
-                  <Button
-                    type="button"
-                    variant="outlined"
-                    onClick={() => handleSaveEdit(index)}
-                  >
-                    Save
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <ListItemText primary={todo.name} />
-                  <Checkbox
-                    onChange={() => checkBox(index)}
-                    color="warning"
-                    id="1"
-                    checked={todo.checked}
-                    {...label}
-                  />
-                  <Button
-                    type="button"
-                    onClick={() => handleEdit(index)}
-                    variant="outlined"
-                  >
-                    Edit
-                  </Button>
-
-                  <Button
-                    type="button"
-                    onClick={() => handleRemove(index)}
-                    variant="outlined"
-                  >
-                    Delete
-                  </Button>
-                </>
-              )}
-            </ListItemButton>
+            <TodoItem
+              key={todo.id}
+              index={index}
+              editingIndex={editingIndex}
+              todo={todo}
+              editedText={editedText}
+              setEditedText={setEditedText}
+              handleRemove={handleRemove}
+              label={label}
+              checkBoxChange={checkBoxChange}
+              handleEdit={handleEdit}
+              handleSaveEdit={handleSaveEdit}
+            />
           ))}
         </Box>
 
